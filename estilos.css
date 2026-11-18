@@ -1,0 +1,164 @@
+body{
+    margin: 0;
+    padding:0;
+    background-color: #111827;
+    color: white;
+    font-family:Arial, sans-serif;
+}
+
+
+.contenedor{
+    max-width: 1100px;
+    margin: auto;
+    padding:20px;
+}
+
+.encabezado{
+    text-align:center;
+    margin-bottom: 30px;
+}
+
+.encabezado h1 {
+    color : #60a5fa;
+}
+.panel-camara {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #000;
+}
+
+#iniciar {
+    display: block;
+    margin: 20px auto;
+    padding: 12px 25px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#iniciar:hover {
+    background-color: #1d4ed8;
+}
+
+#estado {
+    text-align: center;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.panel-estadisticas{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap:20px;
+    margin-top:30px;
+}
+
+.tarjeta{
+    background-color: #1f2937;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+}
+.tarjeta h3{
+    color:#9ca3af;
+    font-size: 16px;
+}
+
+.contador-personas{
+    color: #60a5fa;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#estado-alerta {
+    color :#4ade80;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#estado-alerta.alerta-activa{
+    color: #f87171;
+}
+
+#tarjeta-alerta{
+    background-color: #17352d;
+    border:2px solid #22c55e;
+    transition: all 0.3s ease;
+}
+
+#tarjeta-alerta.alerta-activa{
+    background-color: #451f28;
+    border-color: #f87171;
+}
+
+.barra-camara {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    max-width: 600px;
+    margin: 20px auto 10px;
+}
+
+.barra-camara h2 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.indicador-camara {
+    background-color: #374151;
+    color: #d1d5db;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.indicador-camara.activa {
+    background-color: #17352d;
+    color: #4ade80;
+}
+
+@media (max-width: 600px) {
+
+    .contenedor {
+        padding: 12px;
+    }
+
+    .encabezado h1 {
+        font-size: 24px;
+    }
+
+    .panel-camara {
+        margin: 15px auto;
+    }
+
+    #iniciar {
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .panel-estadisticas {
+        gap: 10px;
+    }
+
+    .tarjeta {
+        padding: 12px;
+    }
+
+    .tarjeta h3 {
+        font-size: 14px;
+    }
+
+    #estado-alerta {
+        font-size: 18px;
+        overflow-wrap: anywhere;
+    }
+}

@@ -1,14 +1,25 @@
 const camara = document.getElementById("camara");
 const boton = document.getElementById("iniciar");
 const estado = document.getElementById("estado");
+const contadorPersonas = document.getElementById("contador-personas");
+const estadoAlerta = document.getElementById("estado-alerta")
 const canvas = document.getElementById("recuadros");
+const tarjetaAlerta = document.getElementById("tarjeta-alerta");
+const indicadorCamara=document.getElementById("indicador-camara");
+camara.addEventListener("playing", () => {
+    indicadorCamara.textContent = "● En vivo";
+    indicadorCamara.classList.add("activa");
+});
 const ctx = canvas.getContext("2d");
 let modelo = null;
 const UMBRAL_ALERTA = 2;
-let inicioAlgoemracion=null;
+let inicioAglomeracion=null;
 const TIEMPO_ALERTA = 3000;
 let inicioBajda = null;
 const TIEMPO_TOLERACIA = 1000;
+
+
+
 
 boton.addEventListener("click", () => {
     estado.textContent = "Activando camara...";
@@ -47,10 +58,13 @@ async function activarCamara() {
     }
 }
 
+
+
 async function detectarObjectos() {
 
     const predicciones = await modelo.detect(camara, 20, 0.3);
     const personas = predicciones.filter(objecto => objecto.class === "person")
+    contadorPersonas.textContent = personas.length;
         canvas.width = camara.videoWidth;
         canvas.height = camara.videoHeight;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -77,26 +91,35 @@ async function detectarObjectos() {
         if(personas.length>= UMBRAL_ALERTA){
             inicioBajda=null;
 
-            if (inicioAlgoemracion===null){
-                inicioAlgoemracion = ahora;
+            if (inicioAglomeracion===null){
+                inicioAglomeracion = ahora;
             }
-        } else if( inicioAlgoemracion !==null){
+        } else if( inicioAglomeracion !==null){
             if(inicioBajda === null){
                 inicioBajda = ahora;
             }
             if ( ahora - inicioBajda >= TIEMPO_TOLERACIA){
 
-                inicioAlgoemracion = null;
+                inicioAglomeracion = null;
                 inicioBajda=null;
             }
         }
 
         if(
-            inicioAlgoemracion !==null &&
-            ahora - inicioAgloemrtacion >= TIEMPO_ALERTA
+            inicioAglomeracion !==null &&
+            ahora - inicioAglomeracion >= TIEMPO_ALERTA
         ){
             estado.textContent += " | posible aglomeracion";
         }
+
+        const alertaActiva = inicioAglomeracion !== null &&
+            ahora - inicioAglomeracion >=TIEMPO_ALERTA;
+
+        estadoAlerta.textContent = alertaActiva
+            ? "posible aglomeracion"
+            : "sin alerta";
+        tarjetaAlerta.classList.toggle("alerta-activa", alertaActiva)
+        estadoAlerta.classList.toggle("alerta-activa",alertaActiva)
 
         requestAnimationFrame(detectarObjectos);
 }
