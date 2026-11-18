@@ -1,0 +1,13 @@
+<body>
+    <div style="position: relative; width: 100%; max-width: 600px;">
+        <video id="camara" autoplay playsinline muted style="display: block; width: 100%; height: auto;"></video>
+        <canvas id="recuadros"
+        style="position: absolute; top: 0;left: 0;width: 100%;height: 100%; pointer-events: none;">
+        </canvas>
+    </div>
+    <button id="iniciar">Activar camara</button>
+    <p id="estado">Camara apagada</p>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+    <script src="script.js?v=2"></script>
+</body>
